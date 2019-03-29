@@ -2,9 +2,8 @@
 
 namespace App;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use App\Events\ApartmentSaving;
+use App\Events\ApartmentSaved;
+use Spatie\Image\Manipulations;
 use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Database\Eloquent\Model;
 use VerumConsilium\Browsershot\Facades\Screenshot;
@@ -19,7 +18,6 @@ class Apartment extends Model
     protected $fillable = [
         'email',
         'url',
-        'user_id',
     ];
 
     /**
@@ -28,7 +26,8 @@ class Apartment extends Model
      * @var array
      */
     protected $appends = [
-        'filename',
+        'screenshot_path',
+        'thumbnail_path',
     ];
 
     /**
@@ -37,7 +36,7 @@ class Apartment extends Model
      * @var array
      */
     protected $dispatchesEvents = [
-        'saving' => ApartmentSaving::class,
+        'saved' => ApartmentSaved::class,
     ];
 
     /**
@@ -55,24 +54,49 @@ class Apartment extends Model
             ->waitUntilNetworkIdle()
             ->dismissDialogs();
 
-        return $screenshot->storeAs('public/screenshots', $this->filename);
+        $directory = "public/screenshots/{$this->user_id}/{$this->id}";
+
+        return $screenshot->storeAs($directory, 'screenshot.jpg');
     }
 
     /**
-     * Get the full path to the image for the apartment listing.
+     * Take a screenshot of the page at the URL, and
+     * save to the public screenshots directory.
+     *
+     * @return string|false
+     */
+    public function saveThumbnail()
+    {
+        $screenshot = Screenshot::loadUrl($this->url)
+            ->useJPG()
+            ->windowSize(800, 600)
+            ->waitUntilNetworkIdle()
+            ->crop(Manipulations::CROP_TOP, 400, 300)
+            ->dismissDialogs();
+
+        $directory = "public/thumbnails/{$this->user_id}/{$this->id}";
+
+        return $screenshot->storeAs($directory, 'thumbnail.jpg');
+    }
+
+    /**
+     * Get the full path to the screenshot for the apartment listing.
      *
      * @return string
      */
-    public function getFilenameAttribute()
+    public function getScreenshotPathAttribute()
     {
-        $components = parse_url($this->url);
-        $host = Arr::get($components, 'host');
-        $path = Arr::get($components, 'path');
-        $slug = Str::slug(
-            implode('-', array_filter([$host, $path]))
-        );
+        return asset("screenshots/{$this->user_id}/{$this->id}/screenshot.jpg");
+    }
 
-        return Str::kebab("{$slug}.jpg");
+    /**
+     * Get the full path to the thumbnail for the apartment listing.
+     *
+     * @return string
+     */
+    public function getThumbnailPathAttribute()
+    {
+        return asset("thumbnails/{$this->user_id}/{$this->id}/thumbnail.jpg");
     }
 
     /**

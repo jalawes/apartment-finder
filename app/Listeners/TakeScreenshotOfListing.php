@@ -2,17 +2,18 @@
 
 namespace App\Listeners;
 
-use App\Events\ApartmentSaving;
+use App\Events\ApartmentSaved;
 
 class TakeScreenshotOfListing
 {
     /**
      * Handle the event.
      *
-     * @param \App\Providers\ApartmentSaving  $event
+     * @param \App\Events\ApartmentSaved $event
+     *
      * @return void
      */
-    public function handle(ApartmentSaving $event)
+    public function handle(ApartmentSaved $event)
     {
         $apartment = $event->apartment;
 
@@ -21,6 +22,8 @@ class TakeScreenshotOfListing
 
             return false;
         }
+
+        $apartment->saveThumbnail();
 
         session()->flash('status', "Screenshot of {$apartment->url} successfully saved!'");
     }

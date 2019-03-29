@@ -59,7 +59,14 @@ return [
             'driver' => 'local',
             'root' => storage_path('app/public/screenshots'),
             'url' => env('APP_URL') . '/screenshots',
-            'visibility' => 'private',
+            'visibility' => 'public',
+        ],
+
+        'thumbnails' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/thumbnails'),
+            'url' => env('APP_URL') . '/thumbnails',
+            'visibility' => 'public',
         ],
 
         's3' => [
