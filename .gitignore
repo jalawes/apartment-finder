@@ -9,3 +9,33 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+# Created by https://www.gitignore.io/api/vue,laravel,sublimetext
+# Edit at https://www.gitignore.io/?templates=vue,laravel,sublimetext
+
+### Laravel ###
+/vendor/
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Laravel 5 & Lumen specific
+public/storage
+public/hot
+storage/*.key
+.env
+Homestead.yaml
+Homestead.json
+/.vagrant
+.phpunit.result.cache
+
+### SublimeText ###
+# Cache files for Sublime Text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# Workspace files are user-specific
+*.sublime-workspace
+
+# End of https://www.gitignore.io/api/vue,laravel,sublimetext
