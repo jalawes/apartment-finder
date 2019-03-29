@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Events\ApartmentSaving;
+use App\Events\ApartmentSaved;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use App\Listeners\TakeScreenshotOfListing;
@@ -20,7 +20,7 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        ApartmentSaving::class => [
+        ApartmentSaved::class => [
             TakeScreenshotOfListing::class,
         ],
     ];
