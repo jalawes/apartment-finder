@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use App\Events\ApartmentSaving;
 use Stevebauman\Purify\Facades\Purify;
@@ -54,7 +55,14 @@ class Apartment extends Model
      */
     public function getFilenameAttribute()
     {
-        return Str::kebab("{$this->url}.jpg");
+        $components = parse_url($this->url);
+        $host = Arr::get($components, 'host');
+        $path = Arr::get($components, 'path');
+        $slug = Str::slug(
+            implode('-', array_filter([$host, $path]))
+        );
+
+        return Str::kebab("{$slug}.jpg");
     }
 
     /**
