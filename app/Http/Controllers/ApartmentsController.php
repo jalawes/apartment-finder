@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Apartment;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreApartmentRequest;
 
 class ApartmentsController extends Controller
 {
@@ -30,10 +31,11 @@ class ApartmentsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\StoreApartmentRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreApartmentRequest $request)
     {
         $apartment = auth()->user()->apartments()->create([
             'email' => $request->email,
