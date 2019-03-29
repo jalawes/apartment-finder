@@ -13,12 +13,13 @@ class ApartmentSaving
     /**
      * @var \App\Apartment
      */
-    protected $apartment;
+    public $apartment;
 
     /**
      * Create a new event instance.
      *
-     * @param mixed $apartment
+     * @param \App\Apartment $apartment
+     *
      * @return void
      */
     public function __construct(Apartment $apartment)
