@@ -23,6 +23,15 @@ class Apartment extends Model
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'filename',
+    ];
+
+    /**
      * The event map for the model.
      *
      * @var array
@@ -41,6 +50,7 @@ class Apartment extends Model
     {
         $screenshot = Screenshot::loadUrl($this->url)
             ->useJPG()
+            ->fullPage()
             ->windowSize(1920, 1080)
             ->waitUntilNetworkIdle()
             ->dismissDialogs();
