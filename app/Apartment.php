@@ -54,7 +54,7 @@ class Apartment extends Model
      */
     public function getFilenameAttribute()
     {
-        return Str::kebab("{$this->id}.jpg");
+        return Str::kebab("{$this->url}.jpg");
     }
 
     /**
