@@ -2,23 +2,10 @@
 
 namespace App\Listeners;
 
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Events\ApartmentSaving;
 
-class TakeScreenshotOfListing implements ShouldQueue
+class TakeScreenshotOfListing
 {
-    use InteractsWithQueue;
-
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
     /**
      * Handle the event.
      *
@@ -28,5 +15,13 @@ class TakeScreenshotOfListing implements ShouldQueue
     public function handle(ApartmentSaving $event)
     {
         $apartment = $event->apartment;
+
+        if (!$apartment->takeScreenshot()) {
+            session()->flash('status', "Encountered an error when saving a screenshot of {$apartment->url}.");
+
+            return false;
+        }
+
+        session()->flash('status', "Screenshot of {$apartment->url} successfully saved!'");
     }
 }
