@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     calendarTime() {
-      return moment(this.date).fromNow();
+      return moment(this.date).calendar();
     },
     now() {
       return moment();
