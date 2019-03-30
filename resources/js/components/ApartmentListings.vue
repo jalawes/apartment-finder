@@ -2,7 +2,7 @@
   <div>
     <div class="card-deck" v-for="chunk in recentApartments">
       <div class="card listing-card-deck" v-for="apartment in chunk" :key="apartment.id">
-        <img :src="apartment.thumbnail_path" class="card-img-top " alt="Recent Apartment Listing">
+        <img :src="apartment.thumbnail_path || 'https://via.placeholder.com/253x189.jpg?text=No+Photo'" class="card-img-top " alt="Recent Apartment Listing">
         <div class="card-footer">
           <small class="text-muted">Last updated <moment :date="apartment.updated_at" :ago="true"></moment>.</small>
         </div>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-const chunk = (arr, size) => Array.from({ length: Math.ceil(arr.length / size) }, (v, i) => arr.slice(i * size, i * size + size));
+import { chunk } from '../helpers/Array';
 
 export default {
   name: 'apartment-listings',
