@@ -25,17 +25,15 @@
 </template>
 
 <script>
-const emptyForm = {
-  email: '',
-  sendEmail: true,
-  url: '',
-};
-
 export default {
   name: 'apartment-finder',
   data() {
     return {
-      apartment: emptyForm,
+      apartment: {
+        email: '',
+        sendEmail: true,
+        url: '',
+      },
     };
   },
   methods: {
@@ -43,7 +41,11 @@ export default {
      * Reset the apartment submission form.
      */
     resetForm() {
-      this.apartment = emptyForm;
+      this.apartment = {
+        email: '',
+        sendEmail: true,
+        url: '',
+      };
     },
 
     /**
