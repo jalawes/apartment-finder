@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Apartment;
+use App\Mail\ApartmentFound;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\StoreApartmentRequest;
 
 class ApartmentsController extends Controller
@@ -41,6 +43,11 @@ class ApartmentsController extends Controller
             'email' => $request->email,
             'url' => $request->url,
         ]);
+
+        if ($request->sendEmail) {
+            $mail = new ApartmentFound($apartment);
+            Mail::send($mail);
+        }
 
         return response($apartment, 202);
     }
