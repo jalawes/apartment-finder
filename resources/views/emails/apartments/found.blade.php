@@ -17,6 +17,8 @@ Thank you for your consideration,
 Jamal Alawes
 <br>
 jamal.alawes@me.com
+
+<br>
+{{ $apartment->url }}
 @endcomponent
 
-{{ $apartment->url }}
