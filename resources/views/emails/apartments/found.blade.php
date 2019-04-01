@@ -13,7 +13,9 @@ I’m very interested in learning more, and eager to hear back from you. Please 
 
 Thank you for your consideration,
 <br>
+<br>
 Jamal Alawes
+<br>
 jamal.alawes@me.com
 @endcomponent
 
