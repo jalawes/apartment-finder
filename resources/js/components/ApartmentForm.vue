@@ -1,6 +1,6 @@
 <template>
-  <div class="card mt-4">
-    <div class="card-header">Apartment Form</div>
+  <div class="card">
+    <div class="card-header">New Apartment</div>
     <div class="card-body">
       <form @submit.prevent="store">
         <div class="form-group">
@@ -13,6 +13,11 @@
           <input type="text" class="form-control" id="url" aria-describedby="listing-url" placeholder="Enter the url of the listing" v-model="apartment.url">
           <small id="listing-url" class="form-text text-muted">This is used to save a the listing so you won't lose it.</small>
         </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="send-email" name="sendEmail" v-model="apartment.sendEmail">
+          <label class="form-check-label" for="send-email">Send Email</label>
+          <small id="emailHelp" class="form-text text-muted">Sends an email to provided email address during submission if checked.</small>
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
@@ -20,14 +25,17 @@
 </template>
 
 <script>
+const emptyForm = {
+  email: '',
+  sendEmail: true,
+  url: '',
+};
+
 export default {
   name: 'apartment-finder',
   data() {
     return {
-      apartment: {
-        email: '',
-        url: '',
-      },
+      apartment: emptyForm,
     };
   },
   methods: {
@@ -35,10 +43,7 @@ export default {
      * Reset the apartment submission form.
      */
     resetForm() {
-      this.apartment = {
-        email: '',
-        url: '',
-      };
+      this.apartment = emptyForm;
     },
 
     /**
@@ -47,9 +52,7 @@ export default {
     store() {
       axios
         .post('apartments', this.apartment)
-        .then(({ data }) => {
-          this.resetForm();
-        })
+        .then(this.resetForm)
         .catch(e => console.error('Oops! Looks like there was an error submitting the form!', e));
     },
   },
