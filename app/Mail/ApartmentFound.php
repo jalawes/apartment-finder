@@ -33,7 +33,7 @@ class ApartmentFound extends Mailable
     public function build()
     {
         return $this->markdown('emails.apartments.found')
-                    ->subject("Apartment Listing ({$this->apartment->url})")
+                    ->subject('Apartment Listing')
                     ->to($this->apartment->email)
                     ->with('apartment', $this->apartment);
     }
