@@ -3,14 +3,12 @@
 namespace App\Mail;
 
 use App\Apartment;
-use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ApartmentFound extends Mailable implements ShouldQueue
+class ApartmentFound extends Mailable
 {
-    use Queueable, SerializesModels;
+    use SerializesModels;
 
     /**
      * @var \App\Apartment
@@ -35,6 +33,7 @@ class ApartmentFound extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->markdown('emails.apartments.found')
+                    ->subject("Apartment Listing ({$this->apartment->url})")
                     ->to($this->apartment->email)
                     ->with('apartment', $this->apartment);
     }
