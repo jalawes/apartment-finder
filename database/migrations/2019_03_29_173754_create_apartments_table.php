@@ -17,7 +17,7 @@ class CreateApartmentsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->string('email');
-            $table->string('url');
+            $table->string('url')->unique();
             $table->timestamps();
         });
     }
