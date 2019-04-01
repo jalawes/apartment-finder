@@ -42,6 +42,7 @@ class StoreApartmentRequest extends FormRequest
             'email.required' => 'A email is required',
             'url.required'  => 'A url is required',
             'url.url'  => 'A url must be a valid url',
+            'url.unique' => 'That URL has already been responded to!',
         ];
     }
 }
