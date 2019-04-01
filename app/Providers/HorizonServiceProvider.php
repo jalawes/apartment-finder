@@ -17,7 +17,7 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
     {
         parent::boot();
         Horizon::routeSlackNotificationsTo(env('SLACK_WEBHOOK_URL'), '#testing');
-        Horizon::night();
+        // Horizon::night();
     }
 
     /**
