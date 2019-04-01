@@ -3,8 +3,9 @@
 namespace App\Listeners;
 
 use App\Events\ApartmentSaved;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TakeScreenshotOfListing
+class TakeScreenshotOfListing implements ShouldQueue
 {
     /**
      * Handle the event.
