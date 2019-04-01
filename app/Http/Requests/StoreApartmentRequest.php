@@ -26,6 +26,7 @@ class StoreApartmentRequest extends FormRequest
         return [
             'email' => 'required|email',
             'url' => 'required|url',
+            'sendEmail' => 'boolean',
         ];
     }
 
