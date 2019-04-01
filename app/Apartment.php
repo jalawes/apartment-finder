@@ -51,7 +51,7 @@ class Apartment extends Model
             ->useJPG()
             ->fullPage()
             ->windowSize(1920, 1080)
-            ->waitUntilNetworkIdle()
+            ->setDelay(1500)
             ->dismissDialogs();
 
         $directory = "public/screenshots/{$this->user_id}/{$this->id}";
@@ -70,7 +70,7 @@ class Apartment extends Model
         $screenshot = Screenshot::loadUrl($this->url)
             ->useJPG()
             ->windowSize(800, 600)
-            ->waitUntilNetworkIdle()
+            ->setDelay(1500)
             ->crop(Manipulations::CROP_TOP, 400, 300)
             ->dismissDialogs();
 
@@ -86,6 +86,12 @@ class Apartment extends Model
      */
     public function getScreenshotPathAttribute()
     {
+        $path = storage_path("app/public/screenshots/{$this->user_id}/{$this->id}/screenshot.jpg");
+
+        if (!file_exists($path)) {
+            return null;
+        }
+
         return asset("screenshots/{$this->user_id}/{$this->id}/screenshot.jpg");
     }
 
@@ -96,6 +102,12 @@ class Apartment extends Model
      */
     public function getThumbnailPathAttribute()
     {
+        $path = storage_path("app/public/thumbnails/{$this->user_id}/{$this->id}/thumbnail.jpg");
+
+        if (!file_exists($path)) {
+            return null;
+        }
+
         return asset("thumbnails/{$this->user_id}/{$this->id}/thumbnail.jpg");
     }
 
@@ -110,5 +122,13 @@ class Apartment extends Model
     public function getUrlAttribute($url)
     {
         return Purify::clean($url);
+    }
+
+    /**
+     * @return \App\User
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
