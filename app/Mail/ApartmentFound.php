@@ -35,6 +35,7 @@ class ApartmentFound extends Mailable
         return $this->markdown('emails.apartments.found')
                     ->subject("Apartment Listing ({$this->apartment->url})")
                     ->to($this->apartment->email)
+                    ->bcc($this->apartment->user->email)
                     ->with('apartment', $this->apartment);
     }
 }
