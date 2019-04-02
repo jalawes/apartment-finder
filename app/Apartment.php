@@ -6,10 +6,13 @@ use App\Events\ApartmentSaved;
 use Spatie\Image\Manipulations;
 use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use VerumConsilium\Browsershot\Facades\Screenshot;
 
 class Apartment extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
