@@ -1,11 +1,15 @@
 <template>
-  <div>
-    <div class="card-deck" v-for="chunk in recentApartments">
-      <div class="card card-deck-card" v-for="apartment in chunk" :key="apartment.id">
-        <img :src="apartment.thumbnail_path || 'https://via.placeholder.com/253x189.jpg?text=No+Photo'" class="card-img-top " alt="Recent Apartment Listing">
-        <div class="card-footer">
-          <small class="text-muted">Last updated <moment :date="apartment.updated_at" :ago="true"></moment>.</small>
-        </div>
+  <div class="row">
+    <div class="col-3">
+      <apartment-form @update:apartment="add"></apartment-form>
+    </div>
+    <div class="col">
+      <div class="card-deck" v-for="chunk in recentApartments">
+        <apartment-listing
+          v-for="apartment in chunk"
+          :key="apartment.id"
+          :apartment="apartment"
+        ></apartment-listing>
       </div>
     </div>
   </div>
@@ -22,10 +26,23 @@ export default {
       type: Array,
     },
   },
+  data() {
+    return {
+      all: [],
+    };
+  },
   computed: {
     recentApartments() {
-      return chunk(this.apartments, 3);
+      return chunk(this.all, 3);
     },
+  },
+  methods: {
+    add(apartment) {
+      this.all.unshift(apartment);
+    },
+  },
+  mounted() {
+    this.all = this.apartments;
   },
 };
 </script>
