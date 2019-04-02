@@ -19,6 +19,7 @@ class CreateApartmentsTable extends Migration
             $table->string('email');
             $table->string('url')->unique();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
