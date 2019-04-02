@@ -13,7 +13,14 @@
   &:not(:first-child) {
     margin-top: 1.5rem;
   }
+
   .card-deck-card {
     max-width: 30%;
+  }
+}
+
+.card-img-top-link {
+  &:hover {
+    cursor: pointer;
   }
 }
