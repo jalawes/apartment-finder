@@ -48,13 +48,18 @@ export default {
       };
     },
 
+    handleNewApartment(apartment) {
+      this.$emit('update:apartment', apartment);
+      this.resetForm();
+    },
+
     /**
      * Store the apartment listing.
      */
     store() {
       axios
         .post('apartments', this.apartment)
-        .then(this.resetForm)
+        .then(({ data }) => this.handleNewApartment(data))
         .catch(e => console.error('Oops! Looks like there was an error submitting the form!', e));
     },
   },
