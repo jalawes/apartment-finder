@@ -20,3 +20,4 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('apartments', 'ApartmentsController@store')->name('apartments.store');
+Route::delete('apartments/{apartment}', 'ApartmentsController@destroy')->name('apartments.destroy');
