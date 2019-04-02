@@ -7,9 +7,12 @@ use Tests\TestCase;
 use App\Mail\ApartmentFound;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ReplyingToApartmentPostTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function testAnAuthenticatedUserCanSendAnEmailToTheAuthorOfAListing()
     {
         Event::fake();
