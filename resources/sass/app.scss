@@ -8,12 +8,12 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.listing-card-deck {
-  max-width: 30%;
-}
 
 .card-deck {
   &:not(:first-child) {
     margin-top: 1.5rem;
+  }
+  .card-deck-card {
+    max-width: 30%;
   }
 }
