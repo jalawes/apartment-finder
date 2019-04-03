@@ -21,6 +21,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home')->with(['apartments' => auth()->user()->apartments]);
+        return view('home')->with([
+            'apartments' => auth()->user()->apartments()->paginate(12),
+        ]);
     }
 }
