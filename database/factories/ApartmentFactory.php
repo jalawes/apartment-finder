@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Apartment::class, function (Faker $faker) {
     return [
-        'email' => $faker->email->valid()->unique(),
+        'email' => $faker->email,
         'url' => $faker->url,
     ];
 });
