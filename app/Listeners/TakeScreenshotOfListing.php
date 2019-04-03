@@ -16,6 +16,10 @@ class TakeScreenshotOfListing implements ShouldQueue
      */
     public function handle(ApartmentSaved $event)
     {
+        if (env('APP_ENV') === 'testing') {
+            return false;
+        }
+
         $apartment = $event->apartment;
 
         if (!$apartment->takeScreenshot()) {
