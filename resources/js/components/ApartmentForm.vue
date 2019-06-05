@@ -20,6 +20,9 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      <small class="text-muted">
+        <a target="_blank" href="https://vancouver.craigslist.org/search/apa?query=-%22no+pet*%22+-%22pets%3A+no*%22+-%22zero+pet*%22+-%22Pets%3A+No*%22+-%22Pets%3A+sorry+not*%22&sort=date&hasPic=1&bundleDuplicates=1&min_price=1000&max_price=1600&availabilityMode=0&sale_date=all+dates">Click here to open the search.</a>
+      </small>
     </div>
   </div>
 </template>
@@ -50,6 +53,7 @@ export default {
 
     handleNewApartment(apartment) {
       this.$emit('update:apartment', apartment);
+      flash('Success! Added new apartment!');
       this.resetForm();
     },
 
@@ -60,7 +64,7 @@ export default {
       axios
         .post('apartments', this.apartment)
         .then(({ data }) => this.handleNewApartment(data))
-        .catch(e => console.error('Oops! Looks like there was an error submitting the form!', e));
+        .catch(e => window.flash(e, 'danger'));
     },
   },
 };
