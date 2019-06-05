@@ -133,4 +133,11 @@ return [
 
     'log_channel' => env('MAIL_LOG_CHANNEL'),
 
+
+    'templates' => [
+        'apartments' => [
+            'found' => env('TEMPLATES_APARTMENTS_FOUND', null),
+        ],
+    ],
+
 ];
