@@ -81,7 +81,18 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    {{ env('APP_NAME') }}
+                    <div class="row">
+                        <div class="col">
+                            {{ env('APP_NAME') }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <a href="{{ route('login') }}">
+                                <img src="img/apartment-finder.svg" width="50%" class="img-fluid" alt="Apartment Finder Landing Logo">
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
