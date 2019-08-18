@@ -32,5 +32,14 @@ export default {
         : 'https://via.placeholder.com/253x189.jpg?text=No+Thumbnail';
     },
   },
+  methods: {
+    deleteApartment() {
+      axios
+        .delete(`/apartments/${this.apartment.id}`)
+        // todo: handling deleting of apartment (emit event)
+        .then(response => console.log(response))
+        .catch(error => console.error(error));
+    },
+  },
 };
 </script>
